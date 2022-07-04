@@ -15,11 +15,13 @@ class Album extends React.Component {
   }
 
   componentDidMount() {
+    // Referência para realizar o Destructuring Assignment e consertar o erro do Lint: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment;
     const { match: { params: { id } } } = this.props;
     const recoveringMusics = async () => {
       const data = await getMusics(id);
       const { collectionName } = data[0];
       const { artistName } = data[0];
+      // Referência para utilizar o slice para fazer uma cópia de um array a partir de um ponto específico: https://www.w3schools.com/jsref/jsref_slice_array.asp;
       const musics = data.slice(1);
       this.setState({
         album: collectionName,
@@ -42,10 +44,11 @@ class Album extends React.Component {
         <h4 data-testid="artist-name">
           {`${artistOrBand}`}
         </h4>
-        { musicList.map(({ trackName, previewUrl, trackId }) => (
+        { musicList.map(({ trackId, trackName, previewUrl }) => (
           <MusicCard
             key={ trackId }
             trackName={ trackName }
+            trackId={ trackId }
             previewUrl={ previewUrl }
           />))}
       </div>
