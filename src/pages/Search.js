@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
+import '../css/login.css';
 
 class Search extends React.Component {
   constructor() {
@@ -80,24 +81,27 @@ class Search extends React.Component {
             Resultado de álbuns de:
             {` ${prevSearch}`}
           </h2>) : (null)}
-        { errors > 0 ? (<h2>Nenhum álbum foi encontrado</h2>) : (
-          finded.map(({ collectionId, collectionName, collectionPrice, releaseDate }) => (
-            <section key={ `${collectionId}` }>
-              <Link
-                to={ `/album/${collectionId}` }
-                data-testid={ `link-to-album-${collectionId}` }
-              >
-                {collectionName}
-              </Link>
-              <p>
-                Price:
-                { collectionPrice }
-              </p>
-              <p>
-                Date:
-                { releaseDate }
-              </p>
-            </section>)))}
+        <div className="father-cards">
+          { errors > 0 ? (<h2>Nenhum álbum foi encontrado</h2>) : (
+            finded
+              .map(({ collectionId, collectionName, collectionPrice, releaseDate }) => (
+                <section key={ `${collectionId}` } className="card-project">
+                  <Link
+                    to={ `/album/${collectionId}` }
+                    data-testid={ `link-to-album-${collectionId}` }
+                  >
+                    {collectionName}
+                  </Link>
+                  <p>
+                    Price:
+                    { collectionPrice }
+                  </p>
+                  <p>
+                    Date:
+                    { releaseDate }
+                  </p>
+                </section>)))}
+        </div>
       </div>
     );
   }

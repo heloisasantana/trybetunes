@@ -5,6 +5,7 @@ import Loading from '../components/Loading';
 import MusicCard from '../components/MusicCard';
 import getMusics from '../services/musicsAPI';
 import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import '../css/login.css';
 
 class Album extends React.Component {
   constructor() {
@@ -79,15 +80,17 @@ class Album extends React.Component {
             <h4 data-testid="artist-name">
               {`${artistOrBand}`}
             </h4>
-            { musicList.map((music) => (
-              <MusicCard
-                key={ music.trackId }
-                trackName={ music.trackName }
-                trackId={ music.trackId }
-                previewUrl={ music.previewUrl }
-                onCheckboxChange={ () => this.handleCheckbox(music) }
-                isFavorited={ this.verificationFavorite(music.trackId) }
-              />))}
+            <div className="father-cards">
+              { musicList.map((music) => (
+                <MusicCard
+                  key={ music.trackId }
+                  trackName={ music.trackName }
+                  trackId={ music.trackId }
+                  previewUrl={ music.previewUrl }
+                  onCheckboxChange={ () => this.handleCheckbox(music) }
+                  isFavorited={ this.verificationFavorite(music.trackId) }
+                />))}
+            </div>
           </div>
         )}
       </div>

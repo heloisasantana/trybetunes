@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../css/login.css';
+// import blackHeartIcon from '../css/blackHeartIcon.svg';
 
 class MusicCard extends React.Component {
   render() {
     const { trackName, trackId, previewUrl, isFavorited, onCheckboxChange } = this.props;
     return (
-      <div>
+      <div className="card-project">
         <h5>{ trackName }</h5>
         <label htmlFor={ `checkbox-music-${trackId}` }>
           Favoritar

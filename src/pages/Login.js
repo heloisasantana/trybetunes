@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { createUser } from '../services/userAPI';
 import Loading from '../components/Loading';
+import '../css/login.css';
 
 class Login extends React.Component {
   constructor() {
@@ -40,24 +41,27 @@ class Login extends React.Component {
   render() {
     const { isDisabled, loading, redirect } = this.state;
     return (
-      <div data-testid="page-login">
-        { loading && <Loading />}
-        { redirect && <Redirect to="/search" /> }
-        <label htmlFor="login-name-input">
+      <div data-testid="page-login" className="login-container">
+        <div className="login-inputs">
+          <h2>TrybeTunes</h2>
+          { loading && <Loading />}
+          { redirect && <Redirect to="/search" /> }
+          <label htmlFor="login-name-input">
+            <input
+              type="text"
+              data-testid="login-name-input"
+              onChange={ this.validateUser }
+            />
+          </label>
           <input
-            type="text"
-            data-testid="login-name-input"
-            onChange={ this.validateUser }
+            name="button"
+            type="submit"
+            value="Entrar"
+            data-testid="login-submit-button"
+            disabled={ isDisabled }
+            onClick={ this.singUpUser }
           />
-        </label>
-        <input
-          name="button"
-          type="submit"
-          value="Entrar"
-          data-testid="login-submit-button"
-          disabled={ isDisabled }
-          onClick={ this.singUpUser }
-        />
+        </div>
       </div>
     );
   }
